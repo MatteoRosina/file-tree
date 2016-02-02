@@ -47,9 +47,11 @@ Example:
         value: function() {
           return {};
         },
-        observe: "_dataChanged"
+        //observe: "_dataChanged"
       },
-
+      observers: [
+        '_dataChanged(data.*)'
+      ],
       /**
        * `selected` is the selected folder.
       */
