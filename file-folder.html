@@ -63,7 +63,7 @@ Example:
     <div class="thisFolder">
       <div class="folderTitle">
         <span class$="{{_determineClass(data.open, data.children)}}" on-click="toggleChildren">
-          <iron-icon icon$="{{_determineIcon(data.shared)}}"></iron-icon>
+          <iron-icon icon$="{{_determineIcon(data.type)}}"></iron-icon>
         </span>
         <span class="name" on-click="selectFolder">{{data.name}}</span>
       </div>
@@ -119,8 +119,20 @@ Example:
      *
      * @param {boolean}, whether or not the folder is shared
     */
-    _determineIcon: function(shared) {
-      return shared ? 'folder-shared' : 'folder';
+    _determineIcon: function(type) {
+      switch (type) {
+        case 'area':
+          return 'folder';
+          break;
+
+        case 'item':
+          return 'editor:insert-drive-file';
+          break;
+          
+        default:
+          return 'folder';
+      }
+      //return shared ? 'folder-shared' : 'folder';
     },
 
     /**

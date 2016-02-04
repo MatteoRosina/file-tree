@@ -22,19 +22,19 @@ This code may only be used under the MIT license found at https://github.com/win
       document.querySelector("file-tree").data = {
         "name": "Tree B",
         "open": true,
-        "shared": false,
+        "type": "area",
         "children": [
           {
             "name": "Child A",
             "open": true,
-            "shared": false,
+            "type": "area",
             "children": [{
               "name": "Grandchild A"
             }]
           },
           {
             "name": "Child B",
-            "shared": true,
+            "type": "item",
             "open": false,
             "children": [{
               "name": "Grandchild B",
@@ -46,7 +46,7 @@ This code may only be used under the MIT license found at https://github.com/win
           },
           {
             "name": "Child C",
-            "shared": false,
+            "type": "area",
             "open": false,
             "children": [{
               "name": "Grandchild C"
@@ -54,7 +54,7 @@ This code may only be used under the MIT license found at https://github.com/win
           },
           {
             "name": "Child D",
-            "shared": false,
+            "type": "area",
             "open": false,
             "children": [{
               "name": "Grandchild D"
