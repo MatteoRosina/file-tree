@@ -16,6 +16,7 @@ Example:
 -->
 
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/editor-icons.html">
 
 <dom-module id="file-folder">
 
@@ -29,15 +30,39 @@ Example:
     .parent.collapsed:before {
       content: '+ ';
       padding: 5px;
+      @apply(--layout-self-center);
     }
 
     .parent.expanded:before {
       content: '- ';
       padding: 5px;
+      @apply(--layout-self-center);
     }
 
-    .parent, .name {
+    .parent {
       cursor: pointer;
+    }
+
+    .name {
+      cursor: pointer;
+      @apply(--file-folder-name-theme);
+    }
+    
+    .title {
+      cursor: pointer;
+      @apply(--file-folder-title-theme);
+    }
+
+    .folderClass {
+        fill: black;
+        stroke: none;
+        @apply(--file-folder-folder-theme);
+    }
+
+    .itemClass {
+        fill: white;
+        stroke: black;
+        @apply(--file-folder-item-theme);
     }
 
     ul {
@@ -52,20 +77,42 @@ Example:
       cursor: pointer;
       width: 24px;
       height: 24px;
+      @apply(--file-folder-icon-theme);
     }
 
     [hidden] {
       display: none;
     }
+    .flex-self-align {
+      @apply(--layout-horizontal);
+      @apply(--layout-justified);
+    }
+    .flex-self-align div {
+      @apply(--layout-flex);
+    }
+    .flexchild {
+      @apply(--layout-self-center);
+    }
+    .flex-vertical {
+      @apply(--layout-vertical);
+      
+    }
+    .flexchild-vertical {
+      @apply(--layout-flex);
+    }
   </style>
 
   <template>
     <div class="thisFolder">
-      <div class="folderTitle">
+      <div class="container flex-self-align folderTitle" on-click="selectFolder">
         <span class$="{{_determineClass(data.open, data.children)}}" on-click="toggleChildren">
-          <iron-icon icon$="{{_determineIcon(data.type)}}"></iron-icon>
+          <iron-icon icon$="{{_determineIcon(data.type)}}"
+            class$="{{_determineIconClass(data.type)}}"></iron-icon>
         </span>
-        <span class="name" on-click="selectFolder">{{data.name}}</span>
+        <div class="container flex-vertical flexchild">
+          <span class="name" >{{data.name}}</span>
+          <span class="name" >{{data.title}}</span>
+        </div>
       </div>
       <ul hidden$={{!data.open}}>
         <template is="dom-repeat" items="{{data.children}}">
@@ -115,9 +162,9 @@ Example:
     },
 
     /**
-     * Returns the necessary folder icon.
+     * Returns the necessary node icon.
      *
-     * @param {boolean}, whether or not the folder is shared
+     * @param {string}, the type of the node: folder or item
     */
     _determineIcon: function(type) {
       switch (type) {
@@ -128,11 +175,31 @@ Example:
         case 'item':
           return 'editor:insert-drive-file';
           break;
-          
+
         default:
           return 'folder';
       }
       //return shared ? 'folder-shared' : 'folder';
+    },
+
+    /**
+     * Returns the necessary node class.
+     *
+     * @param {string}, the type of the node: folder or item
+    */
+    _determineIconClass: function(type) {
+      switch (type) {
+        case 'area':
+          return 'folderClass';
+          break;
+
+        case 'item':
+          return 'itemClass';
+          break;
+
+        default:
+          return 'folderClass';
+      }
     },
 
     /**

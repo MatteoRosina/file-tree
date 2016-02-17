@@ -16,11 +16,35 @@ Example:
 -->
 
 <link rel="import" href="file-folder.html">
+<!--link rel="import" href="default-theme.html"-->
 
 <dom-module id="file-tree">
 
   <style>
+    :host {
+      --file-folder-icon-theme: {
+        width: 54px;
+        height: 54px;
+      };
 
+      --file-folder-folder-theme: {
+        fill: black;
+        stroke: red;
+      };
+
+      --file-folder-item-theme: {
+        fill: red;
+        stroke: black;
+      };
+
+      --file-folder-name-theme: {
+
+      };
+
+      --file-folder-title-theme: {
+
+      };
+    }
   </style>
 
   <template>
